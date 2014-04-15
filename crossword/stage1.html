@@ -1,0 +1,106 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Crossword For Children</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<script src="js/jquery.min.js"></script>
+	<link rel="stylesheet" href="css/crossword.css" type="text/css">
+    <script src="js/nsa.js"></script>
+	<script type="text/javascript">
+	var c = 0;
+	var t;
+	var mint=0,sec=0;
+	var timer_is_on = 0;
+	
+	function timedCount(){ /*function to count time*/
+		document.getElementById("timer").removeAttribute("hidden");
+		document.getElementById("timer").innerHTML="Your Time: "+mint+" minutes "+sec+" seconds";
+		c = c+1;/* variabel c save time per sec*/
+		mint = parseInt(c / 60);
+		sec = c % 60;
+
+		t = setTimeout(function(){timedCount()},1000); /*recursive function to count time,1000=1000ms or 1 sec*/
+	}
+
+	function startTimer(){ /*function to start count time by click radio button on*/
+		if (!timer_is_on){
+  			timer_is_on=1;
+  			timedCount();
+  		}
+	}
+
+	function stopTimer(){ /*function to start count time by click radio button off*/
+		clearTimeout(t);
+		timer_is_on=0;/*reset timer*/
+		c=0; /*reset counter*/
+		document.getElementById("timer").setAttribute("hidden","hidden");/*hidden timer in canvas*/
+	}
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			// if user clicked on button, the overlay layer or the dialogbox, close the dialog	
+			$('a.btn-ok, #dialog-overlay, #dialog-box').click(function () {		
+				$('#dialog-overlay, #dialog-box').hide();		
+					location.reload();
+					return false;
+				}
+			);
+			// if user resize the window, call the same function again
+			// to make sure the overlay fills the screen and dialogbox aligned to center	
+			$(window).resize(function () {
+		
+				//only do it if the dialog box is not hidden
+				if (!$('#dialog-box').is(':hidden')) popup();		
+			});	
+	
+	
+		});
+
+		//Popup dialog
+		function popup(message) {
+		
+			// get the screen height and width  
+			var maskHeight = $(document).height();  
+			var maskWidth = $(window).width();
+	
+			// calculate the values for center alignment
+			var dialogTop =  (maskHeight/3) - ($('#dialog-box').height());  
+			var dialogLeft = (maskWidth/2) - ($('#dialog-box').width()/2); 
+	
+			// assign values to the overlay and dialog box
+			$('#dialog-overlay').css({height:maskHeight, width:maskWidth}).show();
+			$('#dialog-box').css({top:dialogTop, left:dialogLeft}).show();
+	
+			// display the message
+			$('#dialog-message').html(message);
+			
+		}
+	</script>
+	<script src="js/jquery.crossword.js"></script>
+</head>
+
+<body>
+<div class="time">
+	<strong style="font-size: 16px;">Timer:</strong>
+	<input type="radio" name="Timer" id="start" onclick="startTimer()"><strong style="font-size: 14px">ON</strong><!--radio button to start time counter-->
+	<input type="radio" name="Timer" id="stop" onclick="stopTimer()" checked="checked"><strong style="font-size: 14px">OFF</strong> <!--radio button to stop time counter-->
+<h1 id="timer"><!-- Timer appended here --></h1>
+</div>
+<div id="puzzle-wrapper"><!-- crossword puzzle appended here --></div>
+<audio src="sound/yes.mp3" hidden="hidden" id="yes"></audio><!-- initialitation sound yes for right asnwer-->
+<audio src="sound/no.mp3" hidden="hidden" id="no"></audio><!-- initialitation sound no for wrong asnwer-->
+<div id="dialog-overlay"></div>
+<div id="dialog-box">
+	<div class="dialog-content">
+		<div id="dialog-message"></div>
+		<a href="#" class="button">Close</a>
+	</div>
+</div>
+</body>
+</html>	
