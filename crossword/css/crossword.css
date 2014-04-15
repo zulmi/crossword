@@ -1,0 +1,245 @@
+body {
+	font: 62.5%/1.3em Helvetica, sans-serif;
+	width: 90.3%;
+	margin: 10px auto;
+	max-width:960px;
+}
+a { text-decoration:none }
+a:hover, a:active { text-decoration:underline; }
+table { 
+	width: 100%;
+	border: 1px solid #cdcdcd;
+	border-spacing: 0; 
+	max-width: 100%;
+	border-collapse: collapse; 
+	background:#737478;
+}
+table tr{
+	width: 100%;
+}
+table td {
+	padding: 0;
+	margin: 0;
+	border: 1px solid #cdcdcd;
+	background-color: #333;
+	vertical-align: top;
+	background: inherit;
+}
+table td div{
+	position:relative;
+}
+
+td.light{
+	background: #f4f4f4;
+}
+		
+td input {
+	padding: 0em;
+	border: transparent;
+	text-align: center;
+	font-size: 2em;
+	color: #02a62f; /*word entry color*/
+	background:transparent;
+	background-color: #f4f4f4;
+	text-transform: uppercase;/*word entry style uppercase or lowercase*/
+	font-weight:bold;
+	position:absolute;
+	width:100%;
+	height:10px;
+
+	*left:-2px;
+	*top:-2px;
+}
+
+td input:focus {
+	background-color:#9bd2ff; /*color block when focus on answer position*/
+}
+
+td span {
+	color: #444;
+	font-size: 0.8em;
+	position: absolute;
+	top: -1px;
+	left: 1px;
+}
+
+input.done {
+	font-weight: bold;
+	color:#02a62f; /*color if word entry is right answer*/
+}
+
+.active,
+.clues-active {
+	background-color: #fff000; /*color of block crossword and clue if highlighted*/
+}
+.clue-done {
+	color: #999; /*color if answer for clue is right*/
+	text-decoration: line-through; /*text style is answer is right,text will have line through*/
+}
+
+#puzzle-wrapper {
+	float: left;
+	width: 50%;
+	margin-right: 3%;
+}
+#puzzle-clues {
+	float: left;
+	width: 44%;
+}
+
+#puzzle-clues li{
+    list-style: none;
+	font-size: 1.2em;
+	margin: .3em;
+	line-height: 1.6em;
+	cursor:pointer;
+}
+
+#puzzle-clues ul{
+	padding:0;
+}
+#puzzle-clues li{
+	list-style:none;
+	padding-left:2em;
+	clear:both;
+}
+#puzzle-clues li .position{
+	position:absolute;
+	margin-left:-2em;
+	font-weight:bold;
+}
+#puzzle-clues li .position:after{
+	content:".";
+}
+#puzzle-clues li:hover{
+	background-color: #fff000;
+}
+@media (max-width:700px){
+	#puzzle-wrapper,
+	#puzzle-clues {
+		float: none;
+		width: auto;
+		margin-right: 0;
+	}
+	#puzzle-wrapper{
+		margin:0 30px;
+	}
+	#puzzle-clues div{
+		padding:0;
+		float:left;
+		width:40%;
+		margin-left:5%;
+	}
+}
+@media (max-width:480px){
+	#puzzle-clues div{
+		float:none;
+		width:auto;
+	}
+	#puzzle-wrapper{
+		margin:0;
+	}
+}
+
+#puzzle-clues .words{
+	font-size:.9em;
+	color:#888; /*color of clue if not highlighted*/
+	float:right;
+	margin-left:.5em;
+}
+
+/*Pop Up Dialog Message*/
+#dialog-overlay {
+
+	/* set it to fill the whil screen */
+	width:100%; 
+	height:100%;
+	
+	/* transparency for different browsers */
+	filter:alpha(opacity=50); 
+	-moz-opacity:0.5; 
+	-khtml-opacity: 0.5; 
+	opacity: 0.5; 
+	background:#000; 
+
+	/* make sure it appear behind the dialog box but above everything else */
+	position:absolute; 
+	top:0; left:0; 
+	z-index:3000; 
+
+	/* hide it by default */
+	display:none;
+}
+
+
+#dialog-box {
+	
+	/* css3 drop shadow */
+	-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	
+	/* css3 border radius */
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+	
+	background:#eee;
+	/* styling of the dialog box, i have a fixed dimension for this demo */ 
+	width:328px; 
+	
+	/* make sure it has the highest z-index */
+	position:absolute; 
+	z-index:5000; 
+
+	/* hide it by default */
+	display:none;
+}
+
+#dialog-box .dialog-content {
+	/* style the content */
+	text-align:left; 
+	padding:10px; 
+	margin:13px;
+	color:#666; 
+	font-family:arial;
+	font-size:11px; 
+}
+
+a.button {
+	/* styles for button */
+	margin:10px auto 0 auto;
+	text-align:center;
+	background-color: #e33100;
+	display: block;
+	width:50px;
+	padding: 5px 10px 6px;
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 1;
+	
+	/* css3 implementation :) */
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	position: relative;
+	cursor: pointer;
+	
+}
+
+a.button:hover {
+	background-color: #c33100;	
+}
+
+/* extra styling */
+#dialog-box .dialog-content p {
+	font-weight:700; margin:0;
+}
+
+#dialog-box .dialog-content ul {
+	margin:10px 0 10px 20px; 
+	padding:0; 
+	height:50px;
+}
